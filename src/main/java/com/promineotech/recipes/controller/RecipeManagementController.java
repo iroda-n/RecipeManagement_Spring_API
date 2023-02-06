@@ -2,7 +2,6 @@ package com.promineotech.recipes.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -137,7 +136,7 @@ public interface RecipeManagementController {
               name = "recipeName", 
               allowEmptyValue = false, 
               required = false, 
-              description = " The recipe name (i.e., 'Chocolate Chip Cookies')")
+              description = " The recipe name input (i.e., 'Chocolate Chip Cookies')")
         }
       )
  
@@ -231,14 +230,15 @@ public interface RecipeManagementController {
               name = "recipeName", 
               allowEmptyValue = false, 
               required = false, 
-              description = " The recipe name (i.e., 'Chocolate Chip Cookies')")
+              description = " The recipe Id "
+                  + "(1-Lemon Roll, 2-Chocolota chip cookies, 3-Roasted Tomato Basil Soup)")
       }
     )
 
   @DeleteMapping(value = "/recipe")
   @ResponseStatus(code = HttpStatus.OK)
   Recipes deleteRecipe(Long recipeId);
-  /*
+  
 //@formatter:off
   @Operation (
       summary = "Returns a List of Ingredients for specified Recipe",
@@ -269,7 +269,8 @@ public interface RecipeManagementController {
               name = "recipeId", 
               allowEmptyValue = false, 
               required = false, 
-              description = " The recipe name (i.e., 'Chocolate Chip Cookies')")
+              description = " The recipe id "
+                  + "(1-Lemon Roll, 2-Chocolate chip cookies, 3-Roasted Tomato Basil Soup)")
         }
       )
   
@@ -281,8 +282,8 @@ public interface RecipeManagementController {
       Long recipeId);
 
   //@formatter:on
-*/
-  /*
+
+  
 //@formatter:off
   @Operation (
       summary = "Returns a List of Steps for specified Recipe",
@@ -313,7 +314,8 @@ public interface RecipeManagementController {
               name = "recipeId", 
               allowEmptyValue = false, 
               required = false, 
-              description = " The recipe name (i.e., 'Chocolate Chip Cookies')")
+              description = " The recipe Id "
+                  + "(1-Lemon Roll, 2-Chocolota chip cookies, 3-Roasted Tomato Basil Soup)")
         }
       )
   
@@ -325,9 +327,8 @@ public interface RecipeManagementController {
       Long recipeId);
 
   //@formatter:on
-  */
   
-  /*
+  
 //@formatter:off
   @Operation (
       summary = "Returns a List of Categories for specified Recipe",
@@ -358,7 +359,8 @@ public interface RecipeManagementController {
               name = "recipeId", 
               allowEmptyValue = false, 
               required = false, 
-              description = " The recipe name (i.e., 'Chocolate Chip Cookies')")
+              description = " The recipe Id "
+                  + "(1-Lemon Roll, 2-Chocolota chip cookies, 3-Roasted Tomato Basil Soup)")
         }
       )
   
@@ -370,8 +372,6 @@ public interface RecipeManagementController {
       Long recipeId);
 
   //@formatter:on 
-   * 
-   */
 }
 
 

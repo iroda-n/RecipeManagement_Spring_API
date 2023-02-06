@@ -17,9 +17,9 @@ public interface RecipeManagementDao {
   Optional<Recipes> createRecipe(RecipesInput input);
   Optional<Recipes> updateRecipe(Long recipeId, String recipeName, BigDecimal prepTime, BigDecimal cookTime, int servings);
   Optional<Recipes> deleteRecipe(Long recipeId);
-  //List<Category> fetchCategoriesForRecipes(Long recipeId);
-  //List<Ingredients> fetchIngredients(Long recipeId);
-  //List<Steps> fetchSteps(Long recipeId);
+  List<Category> fetchCategoriesForRecipes(Long recipeId);
+  List<Ingredients> fetchIngredients(Long recipeId);
+  List<Steps> fetchSteps(Long recipeId);
   //Optional<Recipes> displayRecipe(Optional<Recipes> recipe, Optional<Ingredients> ingredients, Optional<Category> category, Optional<Steps> steps);
   
 }

@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-//import com.promineotech.recipes.entity.Category;
-//import com.promineotech.recipes.entity.Ingredients;
+import com.promineotech.recipes.entity.Category;
+import com.promineotech.recipes.entity.Ingredients;
 import com.promineotech.recipes.entity.Recipes;
 import com.promineotech.recipes.entity.RecipesInput;
-//import com.promineotech.recipes.entity.Steps;
+import com.promineotech.recipes.entity.Steps;
 import com.promineotech.recipes.service.RecipeManagementService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,11 +20,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DefaultRecipeManagementController implements RecipeManagementController {
   
-  @Autowired
+  //commented out because it causes program to not compile
+  //@Autowired
   private RecipeManagementService recipeManagementService;
   
-  
-
+  /**
+   * @param recipeId
+   * return a recipe using user-entered recipeId
+   */
   @Override
   public Recipes fetchRecipes(@PathVariable Long recipeId) {
     log.info("recipeName={}", recipeId);
@@ -38,16 +41,20 @@ public class DefaultRecipeManagementController implements RecipeManagementContro
                                         String.format("Recipe (%s) not found.", recipeId));
     }
     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Recipe not provided.");
-  }
+  } //end fetchRecipes
           
-  
+  /**
+   * return all recipes in database
+   */
   @Override
   public List<Recipes> allRecipes() {
      List<Recipes> recipes = recipeManagementService.fetchAllRecipes();
      return recipes;
-  }
+  } //end allRecipes
 
-
+  /**
+   * Create a recipe using recipe name provided by user
+   */
   @Override
   public Recipes createRecipe(@RequestBody RecipesInput input) {
     log.info("New Recipe={}", input);
@@ -60,10 +67,11 @@ public class DefaultRecipeManagementController implements RecipeManagementContro
     }
 
     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid recipe. Fields missing.");
-    
-  }
+  } //end createRecipe
 
-
+  /**
+   * update recipe using user-provided recipeId
+   */
   @Override
   public Recipes updateRecipe(Long recipeId, String recipeName, BigDecimal prepTime, BigDecimal cookTime, int servings) {
     if ((recipeName != null) && (!recipeName.isEmpty())) {
@@ -75,9 +83,12 @@ public class DefaultRecipeManagementController implements RecipeManagementContro
     }
 
     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid country. Fields missing.");
-  }
+  } //end updateRecipe
 
 
+  /**
+   * delete specified recipe
+   */
   @Override
   public Recipes deleteRecipe(@PathVariable Long recipeId) {
     if (recipeId != null) {
@@ -94,10 +105,11 @@ public class DefaultRecipeManagementController implements RecipeManagementContro
     }
     
     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Invalid recipe name. Value: %s", recipeId));
-  }
+  } //end deleteRecipe
 
-
-  /*
+  /**
+   * retrieve ingredients for a recipe using recipeId
+   */
   @Override
   public List<Ingredients> fetchIngredients(Long recipeId) {
     log.info("recipeId={}", recipeId);
@@ -111,9 +123,11 @@ public class DefaultRecipeManagementController implements RecipeManagementContro
                                         String.format("Ingredients for recipe Id (%s) not found.", recipeId));
     }
     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Recipe Id not provided.");       
-  }*/
+  } //end fetchIngredients
   
-  /*
+  /**
+   * retrieve steps for a specified recipe using recipeId
+   */
   @Override
   public List<Steps> fetchSteps(Long recipeId) {
     log.info("recipeId={}", recipeId);
@@ -127,10 +141,11 @@ public class DefaultRecipeManagementController implements RecipeManagementContro
                                         String.format("Steps for recipe Id (%s) not found.", recipeId));
     }
     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Recipe Id not provided.");       
-  }
-  */
+  } //end fetchSteps
  
-  /*
+  /**
+   * retrieve category for a specified recipe using recipeId
+   */
   @Override
   public List<Category> fetchCategories(Long recipeId) {
     log.info("recipeId={}", recipeId);
@@ -144,6 +159,6 @@ public class DefaultRecipeManagementController implements RecipeManagementContro
                                         String.format("Steps for recipe Id (%s) not found.", recipeId));
     }
     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Recipe Id not provided.");       
-  }
-  */
-}
+  } //end fetchCategories
+  
+} //end DefaultRecipeManagementController class

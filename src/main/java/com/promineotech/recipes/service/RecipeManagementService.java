@@ -14,7 +14,7 @@ public interface RecipeManagementService {
   Recipes createRecipe(RecipesInput input);
   Recipes updateRecipe(Long recipeId, String recipeName, BigDecimal prepTime, BigDecimal cookTime, int servings);
   Recipes deleteRecipe(Long recipeId);
-  //List<Ingredients> fetchIngredients(Long recipeId);
-  //List<Steps> fetchSteps(Long recipeId);
-  //List<Category> fetchCategoriesForRecipes(Long recipeId);
+  List<Ingredients> fetchIngredients(Long recipeId);
+  List<Steps> fetchSteps(Long recipeId);
+  List<Category> fetchCategoriesForRecipes(Long recipeId);
 }

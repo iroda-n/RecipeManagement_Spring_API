@@ -13,11 +13,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-//import com.promineotech.recipes.entity.Category;
-//import com.promineotech.recipes.entity.Ingredients;
+import com.promineotech.recipes.entity.Category;
+import com.promineotech.recipes.entity.Ingredients;
 import com.promineotech.recipes.entity.Recipes;
 import com.promineotech.recipes.entity.RecipesInput;
-//import com.promineotech.recipes.entity.Steps;
+import com.promineotech.recipes.entity.Steps;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -28,6 +28,12 @@ public class DefaultRecipeManagementDao implements RecipeManagementDao {
   @Autowired
   private NamedParameterJdbcTemplate jdbcTemplate;
 
+  /**
+   * 
+   * @param rs
+   * @param rowNum
+   * @return Recipe object with all recipe information
+   */
   private Recipes toRecipes(ResultSet rs, int rowNum) {
     try {
       Recipes recipe = new Recipes(rs.getLong("recipe_id"), rs.getString("recipe_name"), 
@@ -37,8 +43,11 @@ public class DefaultRecipeManagementDao implements RecipeManagementDao {
     } catch (SQLException e) {
       return null;
     }
-  }
+  } //end toRecipes
 
+  /**
+   * retrieve recipe from database using recipeId
+   */
   @Override
   public Optional<Recipes> fetchRecipes(Long recipeId) {
     log.info("DAO: recipe={}", recipeId);
@@ -58,9 +67,11 @@ public class DefaultRecipeManagementDao implements RecipeManagementDao {
       }
     }
     return Optional.empty();
-  }
+  } //end fetchRecipes
     
-  
+  /**
+   * retrieve all recipes from database
+   */
   @Override
   public Stream<Recipes> fetchAllRecipes () {
     String sql = "SELECT recipe_id,recipe_name,prep_time,cook_time,servings "
@@ -84,9 +95,11 @@ public class DefaultRecipeManagementDao implements RecipeManagementDao {
           }});
     
     return recipes.stream();
-  }
+  } //end fetchAllRecipes
 
-
+  /**
+   * add created recipe to a database
+   */
   @Override
   public Optional<Recipes> createRecipe(RecipesInput input) {
     if ((input != null) && (input.isValid())) {
@@ -107,8 +120,11 @@ public class DefaultRecipeManagementDao implements RecipeManagementDao {
       }
     }
     return Optional.empty();
-  }
+  } //end createRecipe
 
+  /**
+   * update recipe information in database
+   */
   @Override
   public Optional<Recipes> updateRecipe(Long recipeId, String recipeName, BigDecimal prepTime, BigDecimal cookTime, int servings) {
     Optional<Recipes> existing = fetchRecipes(recipeId);
@@ -134,8 +150,11 @@ public class DefaultRecipeManagementDao implements RecipeManagementDao {
       }
     }
     return Optional.empty();
-  }
+  } //end updateRecipe
 
+  /**
+   * delete recipe from database using recipe_id
+   */
   @Override
   public Optional<Recipes> deleteRecipe(Long recipeId) {
     Optional<Recipes> existing = fetchRecipes(recipeId);
@@ -152,9 +171,11 @@ public class DefaultRecipeManagementDao implements RecipeManagementDao {
       }
     }
     return Optional.empty();
-  }
+  } //end deleteRecipe
   
-  /*
+  /**
+   * retrieve category for specified recipe from database
+   */
   @Override
   public List<Category> fetchCategoriesForRecipes(Long recipeId) {
     // @formatter:off
@@ -176,9 +197,11 @@ public class DefaultRecipeManagementDao implements RecipeManagementDao {
               .categoryName(rs.getString("category_name"))
               .build();
         }});
-  }
-  */
-/*
+  } //end fetchCategoriesForRecipes
+  
+  /**
+   * retrieve ingredients for recipe
+   */
   @Override
   public List<Ingredients> fetchIngredients(Long recipeId) {
     // @formatter:off
@@ -202,9 +225,11 @@ public class DefaultRecipeManagementDao implements RecipeManagementDao {
               .ingredientQuantity(rs.getString("ingredient_quantity"))
               .build();
         }});
-  }*/
+  } //end fetchIngredients
 
-  /*
+  /**
+   * retrieve steps for recipe
+   */
   @Override
   public List<Steps> fetchSteps(Long recipeId) {
     // @formatter:off
@@ -228,9 +253,10 @@ public class DefaultRecipeManagementDao implements RecipeManagementDao {
               .stepDescription(rs.getString("step_description"))
               .build();
         }});
-  }
-  */
-  /*@Override
+  } //end fetchSteps
+  
+  /*
+  @Override
   public Optional<Recipes> displayRecipe(Optional<Recipes> recipe,
       Optional<Ingredients> ingredients, Optional<Category> category, Optional<Steps> steps) {
     
@@ -239,6 +265,6 @@ public class DefaultRecipeManagementDao implements RecipeManagementDao {
         .category(category)
         .steps(steps)
         .build();
-  }*/
+  } */
   
-}
+} //end DefaultRecipeManagementDao class
