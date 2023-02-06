@@ -1,8 +1,6 @@
 package com.promineotech.recipes.entity;
 
 import java.math.BigDecimal;
-import java.util.LinkedList;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,9 +19,9 @@ public class Recipes {
   private BigDecimal cookTime;
   private int servings;
   
-  private List<Ingredients> ingredients = new LinkedList<>();
-  private List<Steps> steps = new LinkedList<>();
-  private List<Category> categories = new LinkedList<>();
+  //private List<Ingredients> ingredients = new LinkedList<>();
+  //private List<Steps> steps = new LinkedList<>();
+  //private Optional<Category> categories;
   
   @JsonIgnore
   public Long getrecipeId () {
