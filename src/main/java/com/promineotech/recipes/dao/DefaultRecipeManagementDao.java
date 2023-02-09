@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import com.promineotech.recipes.entity.Category;
 import com.promineotech.recipes.entity.Ingredients;
 import com.promineotech.recipes.entity.Recipes;
@@ -22,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-@Service
 public class DefaultRecipeManagementDao implements RecipeManagementDao {
   
   @Autowired
@@ -179,9 +177,9 @@ public class DefaultRecipeManagementDao implements RecipeManagementDao {
   @Override
   public List<Category> fetchCategoriesForRecipes(Long recipeId) {
     // @formatter:off
-    String sql = "SELECT category_name FROM category c " 
-        + " JOIN recipes_category rc USING (category_id) "
-        + "WHERE recipe_id = :recipe_id";
+    String sql = "SELECT category_name FROM category" 
+        + " JOIN recipes_category USING (category_id) "
+        + "WHERE recipe_id = :recipe_id;";
     // @formatter:on
 
     Map<String, Object> params = new HashMap<>();

@@ -4,9 +4,14 @@ INSERT INTO recipes (recipe_id, recipe_name, prep_time, cook_time, servings) VAL
 INSERT INTO recipes (recipe_id, recipe_name, prep_time, cook_time, servings) VALUES(3, 'Roasted Tomato Basil Soup', 15, 95, 6);
 
 -- Category
-INSERT INTO category (category_id, category_name) VALUES(1, 'Pies');
+INSERT INTO category (category_id, category_name) VALUES(1, 'Cookies');
 INSERT INTO category (category_id, category_name) VALUES(2, 'Pastries');
 INSERT INTO category (category_id, category_name) VALUES(3, 'Soups');
+
+-- Recipes_Category
+INSERT INTO recipes_category (recipe_id, category_id) VALUES(1, 2);
+INSERT INTO recipes_category (recipe_id, category_id) VALUES(2, 1);
+INSERT INTO recipes_category (recipe_id, category_id) VALUES(3, 3);
 
 
 -- Steps Lemon Roll

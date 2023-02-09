@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.promineotech.recipes.entity.Category;
@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.servers.Server;
 
-@RequestMapping("/recipes")
+//@RequestMapping("/recipes")
 @OpenAPIDefinition(info = @Info(title = "Recipe Management Service"), servers = {
       @Server(url = "http://localhost:8080", description = "Local Server.")})
 public interface RecipeManagementController {
@@ -56,15 +56,16 @@ public interface RecipeManagementController {
       },
       parameters = {
           @Parameter(
-              name = "recipeName", 
+              name = "recipeId", 
               allowEmptyValue = false, 
               required = false, 
-              description = " The recipe name (i.e., 'Chocolate Chip Cookies')")
+              description = " The recipe id "
+                  + "(1-Lemon Roll, 2-Chocolota chip cookies, 3-Roasted Tomato Basil Soup)")
         }
       )
   
   
-  @GetMapping(value = "/{id}")
+  @GetMapping(value = "/{recipeId}")
   @ResponseStatus(code = HttpStatus.OK)
   Recipes fetchRecipes(
       @RequestParam(required = false) 
@@ -97,7 +98,7 @@ public interface RecipeManagementController {
       },
       parameters = {
           @Parameter(
-              name = "recipeName", 
+              name = "recipeId", 
               allowEmptyValue = false, 
               required = false, 
               description = " The recipe name (i.e., 'Chocolate Chip Cookies')")
@@ -134,7 +135,7 @@ public interface RecipeManagementController {
       parameters = {
           @Parameter(
               name = "recipeName", 
-              allowEmptyValue = false, 
+              allowEmptyValue = true, 
               required = false, 
               description = " The recipe name input (i.e., 'Chocolate Chip Cookies')")
         }
@@ -192,7 +193,7 @@ public interface RecipeManagementController {
         }
       )
  
-  @PutMapping(value = "/recipes")
+  @PutMapping(value = "/{recipeId}")
   @ResponseStatus(code = HttpStatus.OK)
   Recipes updateRecipe(@RequestParam (required = false) Long recipeId,
       @RequestParam (required = false) String recipeName, 
@@ -235,7 +236,7 @@ public interface RecipeManagementController {
       }
     )
 
-  @DeleteMapping(value = "/recipe")
+  @DeleteMapping(value = "/{recipeId}")
   @ResponseStatus(code = HttpStatus.OK)
   Recipes deleteRecipe(Long recipeId);
   

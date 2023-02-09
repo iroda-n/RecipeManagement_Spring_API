@@ -14,9 +14,10 @@ import com.promineotech.recipes.entity.Category;
 import com.promineotech.recipes.entity.Ingredients;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j 
+ 
 @Service
-public abstract class DefaultRecipeManagementService implements RecipeManagementService {
+@Slf4j
+public class DefaultRecipeManagementService implements RecipeManagementService {
   
   @Autowired
   private RecipeManagementDao recipeManagementDao;

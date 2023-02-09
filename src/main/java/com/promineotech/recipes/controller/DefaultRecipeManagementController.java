@@ -3,6 +3,7 @@ package com.promineotech.recipes.controller;
 import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,10 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
+//@ComponentScan(basePackages = {"com.promineotech.recipes.controller"})
 public class DefaultRecipeManagementController implements RecipeManagementController {
   
   //commented out because it causes program to not compile
-  //@Autowired
+  @Autowired
   private RecipeManagementService recipeManagementService;
   
   /**
